@@ -28,6 +28,9 @@ share/python-wheels/
 #   commonly ignored for libraries.
 uv.lock
 
+# Static files
+staticfiles
+
 # Environments
 .env
 .venv
