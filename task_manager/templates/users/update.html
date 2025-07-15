@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Менеджер задач Hexlet{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h1 class="h4 mb-2 card-title">Изменение пользователя</h1>
+
+            {% if form.errors %}
+            <div class="alert alert-danger mb-4">
+              {% for field, errors in form.errors.items %}
+                {% for error in errors %}<p class="mb-1">{{ error }}</p>{% endfor %}
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+
+              {% for field in form %}
+              <div class="mb-2">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                <small class="text-muted d-block mt-1">{{ field.help_text }}</small>
+                {% endif %}
+              </div>
+              {% endfor %}
+
+              <button type="submit" class="btn btn-primary w-100 py-2">
+                Изменить
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
