@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'python-project-52-09c5.onrender.com',
     'localhost',
+    '127.0.0.1',
     'webserver',
 ]
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
+    'task_manager.users',
 ]
 
 MIDDLEWARE = [
@@ -91,18 +93,28 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'max_similarity': 0.7,
+            'user_attributes': ['username', 'first_name', 'last_name']
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 3,
+        },
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # Отключена проверка на простые пароли:
+    #{
+    #    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    #},
+    # Отключена проверка на "чисто" цифровые пароли:
+    #{
+    #    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    #}
 ]
 
+AUTH_USER_MODEL = 'users.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -119,10 +131,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# LOGIN
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_REDIRECT_URL = 'homepage'
