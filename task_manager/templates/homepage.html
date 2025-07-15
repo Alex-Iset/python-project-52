@@ -3,12 +3,23 @@
 {% block title %}Менеджер задач Hexlet{% endblock %}
 
 {% block content %}
-<div class="card">
-  <div class="card-body p-5 bg-light">
-    <div class="display-4">Привет от Хекслета!</div>
-    <p class="lead">Практические курсы по программированию</p>
-    <hr>
-    <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io">Узнать больше</a>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-18 col-lg-16">
+        <div class="card shadow-sm bg-light">
+          <div class="card-body text-left p-5">
+            <h1 class="display-5">Привет от Хекслета!</h1>
+            <p class="lead text-muted">Практические курсы по программированию</p>
+            <hr class="my-3">
+            <a href="https://ru.hexlet.io"
+               class="btn btn-primary btn-lg px-4"
+               role="button"
+               aria-label="Перейти на сайт Хекслета">
+              Узнать больше
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 {% endblock %}
