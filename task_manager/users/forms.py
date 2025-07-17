@@ -2,10 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from task_manager.users.models import User
-from task_manager.users.constants import FIELD_TEXTS
+from task_manager.constants import FIELD_TEXTS
 
 
-class BaseUserForm:
+class BaseUserFormMixin:
     def __init__(self, field_texts=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         field_texts = field_texts or FIELD_TEXTS
@@ -23,20 +23,13 @@ class BaseUserForm:
             field.widget.attrs.setdefault('class', 'form-control')
 
 
-class UserCreateForm(BaseUserForm, UserCreationForm):
-    class Meta(UserCreationForm.Meta):
+class UserCreateForm(BaseUserFormMixin, UserCreationForm):
+    class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
 
-class UserUpdateForm(BaseUserForm, forms.ModelForm):
+class UserUpdateForm(BaseUserFormMixin, forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username']
-
-    def __init__(self, *args, **kwargs):
-        filtered_texts = {
-            k: v for k, v in FIELD_TEXTS.items() if k in self.Meta.fields
-        }
-        kwargs['field_texts'] = filtered_texts
-        super().__init__(*args, **kwargs)

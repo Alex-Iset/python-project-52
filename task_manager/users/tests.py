@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 
-from task_manager.users.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
+from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
 
 
 User = get_user_model()
@@ -27,7 +27,7 @@ class UsersViewsTestCase(TestCase):
         self.client.logout()
         response = self.client.get(reverse('user_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/create.html')
+        self.assertTemplateUsed(response, 'users/form.html')
 
     def test_user_create_view_post(self):
         self.client.logout()
@@ -59,7 +59,7 @@ class UsersViewsTestCase(TestCase):
         url = reverse('user_update', kwargs={'pk': self.user.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/update.html')
+        self.assertTemplateUsed(response, 'users/form.html')
 
     def test_user_update_view_post_own(self):
         url = reverse('user_update', kwargs={'pk': self.user.pk})
@@ -92,7 +92,7 @@ class UsersViewsTestCase(TestCase):
         response = self.client.post(url)
         self.assertRedirects(response, reverse('users_list'))
         messages = list(get_messages(response.wsgi_request))
-        self.assertTrue(any(SUCCESS_MESSAGES['user_deleted'] in m.message for m in messages))
+        self.assertTrue(any(SUCCESS_MESSAGES['user']['user_deleted'] in m.message for m in messages))
         with self.assertRaises(User.DoesNotExist):
             User.objects.get(pk=self.user.pk)
 
