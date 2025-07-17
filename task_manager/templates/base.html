@@ -26,7 +26,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{% url 'statuses_list' %}">
                 <i class="fas fa-tasks me-1"></i> Статусы
               </a>
             </li>
@@ -77,10 +77,10 @@
       </div>
     </nav>
 
-    <main class="container flex-grow-1 my-4">
+    <div class="container">
       {% if messages %}
         {% for message in messages %}
-          <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+          <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible" role="alert">
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
@@ -88,9 +88,38 @@
       {% endif %}
 
       {% block content %}{% endblock %}
-    </main>
+    </div>
 
     <footer class="mt-auto py-4">
+      {% if is_paginated %}
+        <div class="mb-4">
+          <nav aria-label="Навигация">
+            <ul class="pagination justify-content-center mb-0">
+              {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                  <i class="fas fa-chevron-left"></i>
+                </a>
+              </li>
+              {% endif %}
+
+              {% for num in page_obj.paginator.page_range %}
+              <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                  <i class="fas fa-chevron-right"></i>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      {% endif %}
       <div class="container text-center text-muted">
         <div class="mb-1">
           <a href="https://ru.hexlet.io" target="_blank" class="text-decoration-none">
