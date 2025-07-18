@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib import messages
 
 from task_manager.statuses.models import Status
@@ -50,10 +51,9 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = SUCCESS_MESSAGES['status']['status_deleted']
     error_message = ERROR_MESSAGES['status_using']
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         status = self.get_object()
-        if status.task_set.exists():
-            messages.error(request, self.error_message)
-            return self.render_to_response(self.get_context_data())
-
-        return super().delete(request, *args, **kwargs)
+        if status.tasks.exists():
+            messages.error(self.request, self.error_message)
+            return redirect(self.success_url)
+        return super().form_valid(form)

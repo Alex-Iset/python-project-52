@@ -32,7 +32,6 @@ class UsersListView(ListView):
     template_name = 'users/list.html'
     context_object_name = 'users'
     paginate_by = 8
-    ordering = ['-date_joined']
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
@@ -71,13 +70,12 @@ class UserDeleteView(UserPermissionMixin, SuccessMessageMixin, DeleteView):
     success_message = SUCCESS_MESSAGES['user']['user_deleted']
     error_message = ERROR_MESSAGES['no_permission_update']
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         user = self.get_object()
-        if user.tasks.exists():
-            messages.error(request, ERROR_MESSAGES['user_has_tasks'])
+        if user.tasks_created.exists():
+            messages.error(self.request, ERROR_MESSAGES['user_has_tasks'])
             return redirect(self.success_url)
-
-        return super().delete(request, *args, **kwargs)
+        return super().form_valid(form)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):

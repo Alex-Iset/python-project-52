@@ -1,4 +1,4 @@
-USER_FIELD_TEXTS = {
+FIELD_TEXTS = {
     'first_name': {
         'label': 'Имя',
         'placeholder': 'Имя',
@@ -23,29 +23,6 @@ USER_FIELD_TEXTS = {
         'label': 'Подтверждение пароля',
         'placeholder': 'Подтверждение пароля',
         'help_text': 'Для подтверждения введите, пожалуйста, пароль ещё раз.'
-    }
-}
-
-TASK_FIELD_TEXTS = {
-    'name': {
-        'label': 'Имя',
-        'placeholder': 'Имя'
-    },
-    'description': {
-        'label': 'Описание',
-        'placeholder': 'Описание'
-    },
-    'status': {
-        'label': 'Статус',
-        'placeholder': ''
-    },
-    'executor': {
-        'label': 'Исполнитель',
-        'placeholder': ''
-    },
-    'labels': {
-        'label': 'Метки',
-        'placeholder': ''
     }
 }
 
