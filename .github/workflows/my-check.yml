@@ -1,0 +1,32 @@
+name: my-check
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install uv
+          make install
+      - name: Run linter
+        run:
+          make lint
+      - name: SonarQubeScan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=alex-iset_python-project-52
+            -Dsonar.organization=alex-iset-1
+            -Dsonar.projectName=python-project-52
+            -Dsonar.projectVersion=0.1.0
+            -Dsonar.sources=./task_manager
+            -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.branch.name=main
