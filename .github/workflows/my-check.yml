@@ -23,10 +23,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=alex-iset-1_python-project-52
+            -Dsonar.projectKey=Alex-Iset_python-project-52
             -Dsonar.organization=alex-iset-1
             -Dsonar.projectName=python-project-52
-            -Dsonar.projectVersion=0.1.0
+            -Dsonar.projectVersion=1.0
             -Dsonar.sources=./task_manager
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.branch.name=main
