@@ -2,13 +2,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from task_manager.users.models import User
-from task_manager.constants import FIELD_TEXTS
+from task_manager.constants import USER_FIELD_TEXTS
 
 
 class BaseUserFormMixin:
     def __init__(self, field_texts=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        field_texts = field_texts or FIELD_TEXTS
+        field_texts = field_texts or USER_FIELD_TEXTS
 
         for field_name, field in self.fields.items():
             field_config = field_texts.get(field_name, {})
