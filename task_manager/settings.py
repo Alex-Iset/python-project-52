@@ -14,6 +14,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 import dj_database_url
+import rollbar
 
 
 load_dotenv()
@@ -30,6 +31,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+
+ROLLBAR = {
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
 
 ALLOWED_HOSTS = [
     'python-project-52-09c5.onrender.com',
@@ -62,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
