@@ -1,20 +1,17 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 
+from task_manager.users.models import User
 from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
-
-
-User = get_user_model()
 
 
 class UsersViewsTestCase(TestCase):
     fixtures = ['users.json']
 
     def setUp(self):
-        self.user = User.objects.get(pk=4)
-        self.other_user = User.objects.get(pk=6)
+        self.user = User.objects.get(pk=1)
+        self.other_user = User.objects.get(pk=2)
         self.client.login(username=self.user.username, password='123')
 
     def test_users_list_view(self):

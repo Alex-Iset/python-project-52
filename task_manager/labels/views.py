@@ -57,4 +57,3 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             messages.error(self.request, self.error_message)
             return redirect(self.success_url)
         return super().form_valid(form)
-
