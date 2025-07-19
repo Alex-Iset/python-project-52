@@ -36,4 +36,4 @@ jobs:
             -Dsonar.sources=./task_manager
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.branch.name=main
-            -Dsonar.python.coverage.reportPath=coverage.xml
+            -Dsonar.python.coverage.reportPaths=coverage.xml
