@@ -19,7 +19,7 @@ jobs:
           make lint
       - name: Run Tests
         env:
-          SECRET_KEY: 'django-insecure-test-key'
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DEBUG: 'False'
         run:
           make test
