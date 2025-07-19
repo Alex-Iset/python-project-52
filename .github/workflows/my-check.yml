@@ -18,6 +18,9 @@ jobs:
         run:
           make lint
       - name: Run Tests
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run:
           make test
       - name: SonarQubeScan
