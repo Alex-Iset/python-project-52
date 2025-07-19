@@ -23,7 +23,7 @@ class Task(models.Model):
     )
     author = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         related_name='tasks_created',
         verbose_name='Автор'
     )

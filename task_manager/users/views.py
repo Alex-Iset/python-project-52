@@ -12,7 +12,7 @@ from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
 
 
 class UserPermissionMixin(LoginRequiredMixin):
-    error_message = ERROR_MESSAGES['no_permission']
+    error_message = ERROR_MESSAGES['no_permission_update']
     login_required_message = ERROR_MESSAGES['not_authenticated']
 
     def dispatch(self, request, *args, **kwargs):
@@ -54,7 +54,7 @@ class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
     template_name = 'users/form.html'
     success_url = reverse_lazy('users_list')
     success_message = SUCCESS_MESSAGES['user']['user_updated']
-    error_message = ERROR_MESSAGES['no_permission_update']
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,7 +68,6 @@ class UserDeleteView(UserPermissionMixin, SuccessMessageMixin, DeleteView):
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = SUCCESS_MESSAGES['user']['user_deleted']
-    error_message = ERROR_MESSAGES['no_permission_update']
 
     def form_valid(self, form):
         user = self.get_object()
