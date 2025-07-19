@@ -17,8 +17,8 @@ class UsersViewsTestCase(TestCase):
             'first_name': 'Новое имя',
             'last_name': 'Новая фамилия',
             'username': 'newuser',
-            'password1': '123',
-            'password2': '123'
+            'password1': '123', # NOSONAR
+            'password2': '123' # NOSONAR
         }
 
     def setUp(self):
@@ -148,7 +148,7 @@ class UsersViewsTestCase(TestCase):
         self.client.logout()
         data = {
             'username': self.user.username,
-            'password': '456'
+            'password': '456' # NOSONAR
         }
         response = self.client.post(reverse('login'), data)
         self.assertEqual(response.status_code, 200)
