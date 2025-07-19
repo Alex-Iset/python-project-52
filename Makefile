@@ -25,6 +25,10 @@ render-start:
 test:
 	uv run python3 manage.py test --no-input
 
+test-coverage:
+		uv run coverage run manage.py test
+		uv run coverage report
+
 lint:
 	uv run ruff check
 
