@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import os
 from pathlib import Path
+
+import os
+import sys
+import rollbar
 
 from dotenv import load_dotenv
 import dj_database_url
@@ -31,13 +34,16 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
+IS_TESTING = 'test' in sys.argv
 
-ROLLBAR = {
-    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
-    'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
-    'root': BASE_DIR,
-}
+if not IS_TESTING:
+    ROLLBAR = {
+        'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
+        'environment': 'development' if DEBUG else 'production',
+        'code_version': '1.0',
+        'root': BASE_DIR
+    }
+    rollbar.init(**ROLLBAR)
 
 ALLOWED_HOSTS = [
     'python-project-52-09c5.onrender.com',
