@@ -28,6 +28,7 @@ test:
 test-coverage:
 		uv run coverage run manage.py test
 		uv run coverage report
+		uv run coverage xml
 
 lint:
 	uv run ruff check
