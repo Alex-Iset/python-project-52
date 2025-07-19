@@ -19,14 +19,11 @@ dev:
 shell:
 	uv run python3 manage.py shell
 
-users-fixtures:
-	uv run python manage.py dumpdata users.User --indent 4 > task_manager/users/fixtures/users.json
-
 render-start:
 	gunicorn task_manager.wsgi
 
 test:
-	uv run python3 manage.py test task_manager.users
+	uv run python3 manage.py test
 
 lint:
 	uv run ruff check
