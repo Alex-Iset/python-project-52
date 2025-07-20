@@ -34,11 +34,11 @@
                 <td class="text-end">{{ user.date_joined|date:"d.m.Y H:i" }}</td>
                 <td class="text-end pe-4">
                   <div class="btn-group btn-group-sm">
-                    <a href="{% url 'user_update' user.pk %}" class="btn btn-link text-primary px-2" title="Изменить">
-                      <i class="fas fa-pencil-alt"></i>
+                    <a href="{% url 'user_update' user.pk %}" class="btn text-primary px-2" title="Изменить">
+                      Изменить
                     </a>
-                    <a href="{% url 'user_delete' user.pk %}" class="btn btn-link text-danger px-2" title="Удалить">
-                      <i class="far fa-trash-alt"></i>
+                    <a href="{% url 'user_delete' user.pk %}" class="btn text-danger px-2" title="Удалить">
+                      Удалить
                     </a>
                   </div>
                 </td>

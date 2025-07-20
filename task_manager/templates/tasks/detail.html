@@ -63,11 +63,11 @@
               <i class="bi bi-arrow-left me-2"></i>Назад к списку
             </a>
             <div class="btn-group">
-              <a href="{% url 'task_update' task.id %}" class="btn btn-link text-primary px-2" title="Изменить">
-                <i class="fas fa-pencil-alt"></i>
+              <a href="{% url 'task_update' task.id %}" class="btn text-primary px-2" title="Изменить">
+                Изменить
               </a>
-              <a href="{% url 'task_delete' task.id %}" class="btn btn-link text-danger px-2" title="Удалить">
-                <i class="far fa-trash-alt"></i>
+              <a href="{% url 'task_delete' task.id %}" class="btn text-danger px-2" title="Удалить">
+                Удалить
               </a>
             </div>
           </div>

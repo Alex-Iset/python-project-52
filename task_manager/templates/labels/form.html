@@ -15,6 +15,7 @@
 
               {% for field in form %}
               <div class="mb-2">
+                {{ field.label }}
                 {{ field }}
 
                 {% if field.errors %}

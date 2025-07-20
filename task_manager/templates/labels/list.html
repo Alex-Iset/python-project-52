@@ -38,11 +38,11 @@
                 <td class="text-end">{{ label.created_at|date:"d.m.Y H:i" }}</td>
                 <td class="text-end pe-4">
                   <div class="btn-group btn-group-sm">
-                    <a href="{% url 'label_update' label.pk %}" class="btn btn-link text-primary px-2" title="Изменить">
-                      <i class="fas fa-pencil-alt"></i>
+                    <a href="{% url 'label_update' label.pk %}" class="btn text-primary px-2" title="Изменить">
+                      Изменить
                     </a>
-                    <a href="{% url 'label_delete' label.pk %}" class="btn btn-link text-danger px-2" title="Удалить">
-                      <i class="far fa-trash-alt"></i>
+                    <a href="{% url 'label_delete' label.pk %}" class="btn text-danger px-2" title="Удалить">
+                      Удалить
                     </a>
                   </div>
                 </td>
