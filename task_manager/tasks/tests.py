@@ -9,6 +9,9 @@ from task_manager.labels.models import Label
 from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
 
 
+BASE_FORM = 'base_create_update_form.html'
+
+
 class TaskViewsTest(TestCase):
     fixtures = ['users.json', 'statuses.json', 'labels.json', 'tasks.json']
 
@@ -46,7 +49,7 @@ class TaskViewsTest(TestCase):
     def test_task_create_view_get(self):
         response = self.client.get(reverse('task_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'tasks/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
         self.assertContains(response, 'Создать задачу')
 
     def test_task_create_view_post(self):
@@ -69,7 +72,7 @@ class TaskViewsTest(TestCase):
         task = Task.objects.get(pk=1)
         response = self.client.get(reverse('task_update', args=[task.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'tasks/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
         self.assertContains(response, 'Изменение задачи')
 
     def test_task_update_view_post(self):

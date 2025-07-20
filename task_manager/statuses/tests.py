@@ -8,6 +8,9 @@ from task_manager.statuses.models import Status
 from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
 
 
+BASE_FORM = 'base_create_update_form.html'
+
+
 class StatusTest(TestCase):
     fixtures = ['users.json', 'labels.json', 'statuses.json']
 
@@ -30,7 +33,7 @@ class StatusTest(TestCase):
     def test_status_create_view_get(self):
         response = self.client.get(reverse('status_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'statuses/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
         self.assertContains(response, 'Создать статус')
 
     def test_status_create_view_post(self):
@@ -49,7 +52,7 @@ class StatusTest(TestCase):
     def test_status_update_view_get(self):
         response = self.client.get(reverse('status_update', args=[self.status.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'statuses/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
         self.assertContains(response, 'Изменение статуса')
 
     def test_status_update_view_post(self):

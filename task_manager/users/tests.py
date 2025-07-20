@@ -6,6 +6,9 @@ from task_manager.users.models import User
 from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
 
 
+BASE_FORM = 'base_create_update_form.html'
+
+
 class UsersViewsTestCase(TestCase):
     fixtures = ['users.json', 'tasks.json', 'labels.json', 'statuses.json']
 
@@ -43,7 +46,7 @@ class UsersViewsTestCase(TestCase):
         self.client.logout()
         response = self.client.get(reverse('user_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
 
     def test_user_create_view_post(self):
         self.client.logout()
@@ -63,7 +66,7 @@ class UsersViewsTestCase(TestCase):
         url = reverse('user_update', kwargs={'pk': self.user.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/form.html')
+        self.assertTemplateUsed(response, BASE_FORM)
 
     def test_user_update_view_post_own(self):
         updated_data = {
