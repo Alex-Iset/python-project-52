@@ -1,8 +1,8 @@
-build:
-	./build.sh
-
 install:
 	uv sync
+
+build:
+	./build.sh
 
 collectstatic:
 	uv run python3 manage.py collectstatic --no-input
