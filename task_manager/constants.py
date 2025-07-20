@@ -52,12 +52,12 @@ TASK_FIELD_TEXTS = {
 SUCCESS_MESSAGES = {
     'user': {
         'user_created': 'Пользователь успешно зарегистрирован',
-        'user_updated': 'Пользователь успешно изменён',
+        'user_updated': 'Пользователь успешно изменен',
         'user_deleted': 'Пользователь успешно удалён',
     },
     'status': {
         'status_created': 'Статус успешно создан',
-        'status_updated': 'Статус успешно изменён',
+        'status_updated': 'Статус успешно изменен',
         'status_deleted': 'Статус успешно удален',
     },
     'task':{
