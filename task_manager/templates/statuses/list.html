@@ -8,10 +8,7 @@
       <h1 class="h5 mb-0">
         <i class="fas fa-tasks me-2"></i>Статусы
       </h1>
-      <form method="get" action="{% url 'status_create' %}">
-        {% csrf_token %}
-        <input class="btn btn-primary" type="submit" value="Создать статус">
-      </form>
+      <a href="{% url 'status_create' %}" class="btn btn-primary">Создать статус</a>
     </div>
 
     <div class="card-body p-0">

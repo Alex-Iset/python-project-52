@@ -8,10 +8,7 @@
       <h1 class="h5 mb-0">
         <i class="fas fa-tags me-1"></i> Задачи
       </h1>
-      <form method="get" action="{% url 'task_create' %}">
-        {% csrf_token %}
-        <input class="btn btn-primary" type="submit" value="Создать задачу">
-      </form>
+      <a href="{% url 'task_create' %}" class="btn btn-primary">Создать задачу</a>
     </div>
     <form method="get" class="p-3 bg-light rounded shadow-sm">
       <div class="mb-1">

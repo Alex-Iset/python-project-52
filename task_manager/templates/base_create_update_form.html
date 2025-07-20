@@ -19,15 +19,15 @@
                 {{ field }}
 
                 {% if field.errors %}
-                    <div class="text-danger small mt-1">
-                      {% for error in field.errors %}
-                        {{ error|striptags }}<br>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
+                  <div class="text-danger small mt-1">
+                    {% for error in field.errors %}
+                    {{ error|striptags }}<br>
+                    {% endfor %}
+                  </div>
+                {% endif %}
 
                 {% if field.help_text %}
-                <small class="text-muted d-block mt-1">{{ field.help_text }}</small>
+                  <small class="text-muted d-block mt-1">{{ field.help_text }}</small>
                 {% endif %}
               </div>
               {% endfor %}
