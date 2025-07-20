@@ -9,14 +9,13 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import sys
 import os
+import sys
 from pathlib import Path
 
 import dj_database_url
 import rollbar
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
@@ -138,13 +137,13 @@ AUTH_PASSWORD_VALIDATORS = [
         },
     },
     # Отключена проверка на простые пароли:
-    #{
+    # {
     #    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    #},
+    # },
     # Отключена проверка на "чисто" цифровые пароли:
-    #{
+    # {
     #    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    #}
+    # }
 ]
 
 AUTH_USER_MODEL = 'users.User'

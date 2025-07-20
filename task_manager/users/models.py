@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-
 USERNAME_REGEX = r'^[a-zA-Zа-яА-Я0-9@.+-_]+\Z'
 
 
@@ -26,7 +25,10 @@ class User(AbstractUser):
         unique=True,
         verbose_name='Имя пользователя',
         validators=[RegexValidator(USERNAME_REGEX)],
-        help_text='Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.'
+        help_text='''
+        Обязательное поле. Не более 150 символов. 
+        Только буквы, цифры и символы @/./+/-/_.
+        '''
     )
     date_joined = models.DateTimeField(
         auto_now_add=True,

@@ -1,12 +1,11 @@
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.messages import get_messages
+from django.test import Client, TestCase
+from django.urls import reverse
 
-from task_manager.users.models import User
-from task_manager.tasks.models import Task
+from task_manager.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from task_manager.statuses.models import Status
-from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
-
+from task_manager.tasks.models import Task
+from task_manager.users.models import User
 
 BASE_FORM = 'base_create_update_form.html'
 
@@ -47,10 +46,14 @@ class StatusTest(TestCase):
         self.assertTrue(Status.objects.filter(name='Статус').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['status']['status_created'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['status']['status_created'], str(messages[0])
+        )
 
     def test_status_update_view_get(self):
-        response = self.client.get(reverse('status_update', args=[self.status.pk]))
+        response = self.client.get(
+            reverse('status_update', args=[self.status.pk])
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, BASE_FORM)
         self.assertContains(response, 'Изменение статуса')
@@ -67,10 +70,14 @@ class StatusTest(TestCase):
         self.assertEqual(self.status.name, 'Измененный статус')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['status']['status_updated'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['status']['status_updated'], str(messages[0])
+        )
 
     def test_status_delete_view_get(self):
-        response = self.client.get(reverse('status_delete', args=[self.status.pk]))
+        response = self.client.get(
+            reverse('status_delete', args=[self.status.pk])
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'statuses/delete.html')
 
@@ -83,7 +90,9 @@ class StatusTest(TestCase):
         self.assertEqual(Status.objects.count(), 0)
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['status']['status_deleted'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['status']['status_deleted'], str(messages[0])
+        )
 
     def test_status_delete_used_status(self):
         Task.objects.create(

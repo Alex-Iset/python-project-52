@@ -47,7 +47,7 @@ venv.bak/
 .python-version
 
 #ruff
-ruff.toml
+.ruff_cache/
 
 #pytest-coverage
 .coverage

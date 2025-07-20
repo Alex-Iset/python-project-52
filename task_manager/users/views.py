@@ -1,14 +1,14 @@
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from task_manager.users.models import User
+from task_manager.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from task_manager.users.forms import UserCreateForm, UserUpdateForm
-from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
+from task_manager.users.models import User
 
 
 class UserPermissionMixin(LoginRequiredMixin):
@@ -55,7 +55,6 @@ class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('users_list')
     success_message = SUCCESS_MESSAGES['user']['user_updated']
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_title'] = 'Изменение пользователя'
@@ -78,7 +77,7 @@ class UserDeleteView(UserPermissionMixin, SuccessMessageMixin, DeleteView):
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
-    template_name='users/auth/login.html'
+    template_name = 'users/auth/login.html'
     redirect_authenticated_user = True
     success_message = SUCCESS_MESSAGES['logged_in']
     error_message = ERROR_MESSAGES['login_invalid']

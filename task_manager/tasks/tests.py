@@ -1,13 +1,12 @@
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.messages import get_messages
+from django.test import Client, TestCase
+from django.urls import reverse
 
-from task_manager.users.models import User
-from task_manager.tasks.models import Task
-from task_manager.statuses.models import Status
+from task_manager.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from task_manager.labels.models import Label
-from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
-
+from task_manager.statuses.models import Status
+from task_manager.tasks.models import Task
+from task_manager.users.models import User
 
 BASE_FORM = 'base_create_update_form.html'
 
@@ -66,7 +65,9 @@ class TaskViewsTest(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['task']['task_created'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['task']['task_created'], str(messages[0])
+        )
 
     def test_task_update_view_get(self):
         task = Task.objects.get(pk=1)
@@ -91,7 +92,9 @@ class TaskViewsTest(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['task']['task_updated'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['task']['task_updated'], str(messages[0])
+        )
 
     def test_task_delete_view_get(self):
         task = Task.objects.get(pk=1)
@@ -110,7 +113,9 @@ class TaskViewsTest(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['task']['task_deleted'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['task']['task_deleted'], str(messages[0])
+        )
 
     def test_task_delete_by_non_author(self):
         self.client.force_login(self.user2)
@@ -128,4 +133,6 @@ class TaskViewsTest(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(ERROR_MESSAGES['only_author_can_delete'], str(messages[0]))
+        self.assertIn(
+            ERROR_MESSAGES['only_author_can_delete'], str(messages[0])
+        )

@@ -60,7 +60,7 @@ SUCCESS_MESSAGES = {
         'status_updated': 'Статус успешно изменен',
         'status_deleted': 'Статус успешно удален',
     },
-    'task':{
+    'task': {
         'task_created': 'Задача успешно создана',
         'task_updated': 'Задача успешно изменена',
         'task_deleted': 'Задача успешно удалена',

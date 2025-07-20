@@ -1,15 +1,15 @@
-from django_filters.views import FilterView
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
 
-from task_manager.tasks.models import Task
-from task_manager.tasks.forms import TaskForm
+from task_manager.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from task_manager.tasks.filter import TaskFilter
-from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
+from task_manager.tasks.forms import TaskForm
+from task_manager.tasks.models import Task
 
 
 class TaskListView(LoginRequiredMixin, FilterView):

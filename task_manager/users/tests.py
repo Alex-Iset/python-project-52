@@ -1,10 +1,9 @@
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.messages import get_messages
+from django.test import Client, TestCase
+from django.urls import reverse
 
+from task_manager.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from task_manager.users.models import User
-from task_manager.constants import SUCCESS_MESSAGES, ERROR_MESSAGES
-
 
 BASE_FORM = 'base_create_update_form.html'
 
@@ -20,8 +19,8 @@ class UsersViewsTestCase(TestCase):
             'first_name': 'Новое имя',
             'last_name': 'Новая фамилия',
             'username': 'newuser',
-            'password1': '123', # NOSONAR
-            'password2': '123' # NOSONAR
+            'password1': '123',  # NOSONAR
+            'password2': '123'  # NOSONAR
         }
 
     def setUp(self):
@@ -60,7 +59,9 @@ class UsersViewsTestCase(TestCase):
         self.assertTrue(User.objects.filter(username='newuser').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['user']['user_created'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['user']['user_created'], str(messages[0])
+        )
 
     def test_user_update_view_get_own(self):
         url = reverse('user_update', kwargs={'pk': self.user.pk})
@@ -83,7 +84,9 @@ class UsersViewsTestCase(TestCase):
         self.assertEqual(self.user.username, 'updated_username')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['user']['user_updated'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['user']['user_updated'], str(messages[0])
+        )
 
     def test_user_update_no_permission(self):
         url = reverse('user_update', kwargs={'pk': self.user.pk})
@@ -111,7 +114,9 @@ class UsersViewsTestCase(TestCase):
         self.assertFalse(User.objects.filter(pk=new_user.pk).exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertIn(SUCCESS_MESSAGES['user']['user_deleted'], str(messages[0]))
+        self.assertIn(
+            SUCCESS_MESSAGES['user']['user_deleted'], str(messages[0])
+        )
 
     def test_user_delete_with_tasks(self):
         url = reverse('user_delete', kwargs={'pk': self.user.pk})
@@ -153,7 +158,7 @@ class UsersViewsTestCase(TestCase):
         self.client.logout()
         data = {
             'username': self.user.username,
-            'password': '456' # NOSONAR
+            'password': '456'  # NOSONAR
         }
         response = self.client.post(reverse('login'), data)
         self.assertEqual(response.status_code, 200)
