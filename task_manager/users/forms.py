@@ -32,6 +32,9 @@ class UserCreateForm(BaseUserFormMixin, UserCreationForm):
 
 
 class UserUpdateForm(BaseUserFormMixin, forms.ModelForm):
+    password1 = forms.CharField()
+    password2 = forms.CharField()
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username']
+        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']

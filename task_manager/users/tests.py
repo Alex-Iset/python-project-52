@@ -73,6 +73,8 @@ class UsersViewsTestCase(TestCase):
             'first_name': 'Измененное имя',
             'last_name': 'Измененная фамилия',
             'username': 'updated_username',
+            'password1': '123',  # NOSONAR
+            'password2': '123'  # NOSONAR
         }
         url = reverse('user_update', kwargs={'pk': self.user.pk})
         response = self.client.post(url, data=updated_data, follow=True)
