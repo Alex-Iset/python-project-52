@@ -2,8 +2,7 @@ line-length = 80
 
 exclude = [
     "migrations",
-    "settings.py",
-    "constants.py"
+    "settings.py"
 ]
 
 [lint.per-file-ignores]
