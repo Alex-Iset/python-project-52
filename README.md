@@ -29,7 +29,9 @@
 ### [2. Installing and launch](#installing-and-launch)
 
 ## «Task Manager»:
-«Task Manager» - a task management system similar to http://www.redmine.org/. It allows you to set tasks, assign executors, and change their statuses. To use the system, you need to register and authenticate: [Task Manager](https://python-project-52-09c5.onrender.com)
+«Task Manager» - a task management system similar to http://www.redmine.org/.
+It allows you to set tasks, assign executors, and change their statuses.
+To use the system, you need to register and authenticate: [Task Manager](https://python-project-52-09c5.onrender.com)
 
 ## Installing and launch
 1. Clone the repository and then navigate to it. All subsequent commands should be executed from within the "python-project-52" directory.
